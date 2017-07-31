@@ -27,7 +27,10 @@ jinja_environment = jinja2.Environment(loader=
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+<<<<<<< HEAD
         logging.info("hello from the get")
+=======
+>>>>>>> 63c47a2721424ecfe858e47d84a64de782a1b515
         template = jinja_environment.get_template('templates/search_zip.html')
         self.response.write(template.render())
     def post(self):
