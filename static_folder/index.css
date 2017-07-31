@@ -1,6 +1,40 @@
-#Logo{
-  margin-left: auto;
-  margin-right: auto;
+body{
+  background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/scrolling-film-strip-3-transparent-alpha-channel-loop_-1_ih8dxs__F0000.png");
+}
+img{
+  display: block;
+  margin: auto;
   height: 100px;
   width: 100px;
+}
+h1{
+  text-align: center;
+  font-family: cursive;
+  color: #FFFFFF;
+  font-size: 60px;
+}
+p{
+  text-align: center;
+  font-family: fantasy;
+  color: #FFFFFF;
+  font-size: 20px;
+}
+form{
+  text-align: center;
+}
+#textbox{
+  height:30px;
+  width: 400px;
+  font-size:14pt;
+}
+.button {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    font-family: sans-serif;
+    height: 30px;
+    width:  90px;
+}
+.button:hover{
+  background-color: #00B6FF;
+  color: white;
 }
