@@ -36,8 +36,10 @@
         {% endfor %}
       </ul>
     </div> -->
-    <div id='movie1'>Movie #1
+    <section id='movies'>
       {% for movie in movies %}
+      <div id="movie" + number>
+        Movie 
         <ul>
           <li> {{ movie.title }} </li>
           <li> {{ movie.shortDescription }} </li>
@@ -55,7 +57,8 @@
             </li>
           {% endfor %}
         </ul>
+      </div>
       {% endfor %}
-    </div>
+    </section>
   </body>
 </html>
