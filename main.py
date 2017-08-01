@@ -36,14 +36,10 @@ class MainHandler(webapp2.RequestHandler):
         date_search = self.request.get('date_input')
 
         base_url = "http://data.tmsapi.com/v1.1/movies/showings?"
-<<<<<<< HEAD
-        url_params = {'zip': zip_search, 'api_key': 'gvaqgra59ma2sxhjmcx9ccqk', 'startDate': '2017-08-01'}
-=======
-        url_params = {'zip': zip_search, 'api_key': 'qvhrjfxsk6j6bgcedpugeg35', 'startDate': date_search}
->>>>>>> 5bdeb32067572a61e23deb258bf8507e1bb8a8c4
+        url_params = {'zip': zip_search, 'api_key': 'j64dygayhsr2t65fameywyxf', 'startDate': date_search}
         movie_response = urllib2.urlopen(base_url + urllib.urlencode(url_params)).read()
         parsed_movie_dictionary = json.loads(movie_response)
-        movies = parsed_movie_dictionary[:5]
+        movies = {"movies" : parsed_movie_dictionary[:5]}
 
         self.response.write(template.render(movies))
 

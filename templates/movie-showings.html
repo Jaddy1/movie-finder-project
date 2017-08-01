@@ -17,29 +17,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <!-- <div id='movie1'>Movie #1
+    {% for movie in movies %}
       <ul>
-        <li> {{ title }} </li>
-        <li> {{ shortDescription }} </li>
-
-        {% for people in topCast %}
-          <li>
-            {% print people %}
-          </li>
-        {% endfor %}
-
-        {% for theatre in showtimes %}
-          <li>
-            {{ theatre.theatre.name }}
-            {{ theatre.dateTime }}
-          </li>
-        {% endfor %}
-      </ul>
-    </div> -->
-    <div id='movie1'>Movie #1
-      {% for movie in movies %}
-        <ul>
-          <li> {{ movie.title }} </li>
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{ movie.rootId }}"> {{ movie.title }} </button>
+        <div id="{{ movie.rootId }}" class="collapse">
           <li> {{ movie.shortDescription }} </li>
 
           {% for people in movie.topCast %}
@@ -50,12 +31,11 @@
 
           {% for theatre in movie.showtimes %}
             <li>
-              {{ theatre.theatre.name }}
-              {{ theatre.dateTime }}
+              {{ theatre.theatre.name }} Date/Time: {{ theatre.dateTime }}
             </li>
           {% endfor %}
-        </ul>
-      {% endfor %}
-    </div>
+        </div>
+      </ul>
+    {% endfor %}
   </body>
 </html>
