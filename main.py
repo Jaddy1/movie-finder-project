@@ -31,13 +31,12 @@ class MainHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template('templates/search_zip.html')
         self.response.write(template.render())
     def post(self):
-        logging.info("hello")
         template = jinja_environment.get_template('templates/movie-showings.html')
         zip_search = self.request.get('zip_code_input')
         date_search = self.request.get('date_input')
 
         base_url = "http://data.tmsapi.com/v1.1/movies/showings?"
-        url_params = {'zip': zip_search, 'api_key': 'qvhrjfxsk6j6bgcedpugeg35', 'startDate': date_search}
+        url_params = {'zip': zip_search, 'api_key': '36k9bq59cgdtxm2xaxx8r6gr', 'startDate': date_search}
         movie_response = urllib2.urlopen(base_url + urllib.urlencode(url_params)).read()
         parsed_movie_dictionary = json.loads(movie_response)
         movies = {'movies' : parsed_movie_dictionary[:5]}

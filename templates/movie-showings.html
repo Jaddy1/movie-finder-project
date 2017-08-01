@@ -3,13 +3,6 @@
   <head>
     <title>Movie Showtimes and Listings</title>
     <link rel="stylesheet" href="/resources/movie-showings.css">
-  </head>
-  <body>
-    <a href="/"><img src="https://cdn3.iconfinder.com/data/icons/multimedia/100/play_movie_3-512.png"></a>
-    <div id='movie1'>
-      <p> {{ title }} </p><br>
-      <p> {{ shortDescription }} </p><br>
-      <p> {{ topCast }} </p><br>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -17,48 +10,36 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <!-- <div id='movie1'>Movie #1
+    <a href="/"><img src="https://cdn3.iconfinder.com/data/icons/multimedia/100/play_movie_3-512.png"></a>
+    <div id='movie1'>
+    {% for movie in movies %}
+    <section>
       <ul>
-        <li> {{ title }} </li>
-        <li> {{ shortDescription }} </li>
-
-        {% for people in topCast %}
-          <li>
-            {% print people %}
-          </li>
-        {% endfor %}
-
-        {% for theatre in showtimes %}
-          <li>
-            {{ theatre.theatre.name }}
-            {{ theatre.dateTime }}
-          </li>
-        {% endfor %}
-      </ul>
-    </div> -->
-    <section id='movies'>
-      {% for movie in movies %}
-      <div id="movie" + number>
-        Movie 
-        <ul>
-          <li> {{ movie.title }} </li>
+        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{ movie.rootId }}"> {{ movie.title }} </button>
+        <div id="{{ movie.rootId }}" class="collapse">
+          <h2>Description</h2>
           <li> {{ movie.shortDescription }} </li>
 
+          <h2>Actors</h2>
           {% for people in movie.topCast %}
             <li>
               {% print people %}
             </li>
           {% endfor %}
 
+          <h2>Theater</h2>
           {% for theatre in movie.showtimes %}
             <li>
-              {{ theatre.theatre.name }}
-              {{ theatre.dateTime }}
+              {{ theatre.theatre.name }} Date/Time: {{ theatre.dateTime }}
             </li>
           {% endfor %}
-        </ul>
-      </div>
-      {% endfor %}
+          <form action="{{ movie.officialUrl }}">
+            <button type="submit">Buy Ticket</button>
+          </form>
+        </div>
+      </ul>
     </section>
+    </br>
+    {% endfor %}
   </body>
 </html>
