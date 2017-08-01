@@ -1,0 +1,9 @@
+body{
+  background-image: url("http://www.guoguiyan.com/data/out/71/69032835-film-wallpapers.jpg");
+}
+img{
+  display: block;
+  margin: auto;
+  height: 100px;
+  width: 100px;
+}

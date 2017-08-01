@@ -7,7 +7,7 @@ img{
   height: 100px;
   width: 100px;
 }
-h1{
+#MovieFinder{
   text-align: center;
   font-family: cursive;
   color: #FFFFFF;
@@ -27,7 +27,7 @@ form{
   width: 400px;
   font-size:14pt;
 }
-.button {
+.btn-outline{
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
     font-family: sans-serif;

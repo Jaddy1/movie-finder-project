@@ -36,7 +36,7 @@ class MainHandler(webapp2.RequestHandler):
         zip_search = self.request.get('zip_code_input')
 
         base_url = "http://data.tmsapi.com/v1.1/movies/showings?"
-        url_params = {'zip': zip_search, 'api_key': 'dev9tj3wfhmyq736p82tnffn', 'startDate': '2017-08-01'}
+        url_params = {'zip': zip_search, 'api_key': 'gvaqgra59ma2sxhjmcx9ccqk', 'startDate': '2017-08-01'}
         movie_response = urllib2.urlopen(base_url + urllib.urlencode(url_params)).read()
         parsed_movie_dictionary = json.loads(movie_response)
         logging.info(parsed_movie_dictionary)
