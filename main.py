@@ -27,10 +27,7 @@ jinja_environment = jinja2.Environment(loader=
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-<<<<<<< HEAD
         logging.info("hello from the get")
-=======
->>>>>>> 63c47a2721424ecfe858e47d84a64de782a1b515
         template = jinja_environment.get_template('templates/search_zip.html')
         self.response.write(template.render())
     def post(self):
@@ -39,12 +36,12 @@ class MainHandler(webapp2.RequestHandler):
         zip_search = self.request.get('zip_code_input')
 
         base_url = "http://data.tmsapi.com/v1.1/movies/showings?"
-        url_params = {'zip': zip_search, 'api_key': 'dev9tj3wfhmyq736p82tnffn', 'startDate': '2017-07-31'}
+        url_params = {'zip': zip_search, 'api_key': 'dev9tj3wfhmyq736p82tnffn', 'startDate': '2017-08-01'}
         movie_response = urllib2.urlopen(base_url + urllib.urlencode(url_params)).read()
         parsed_movie_dictionary = json.loads(movie_response)
         logging.info(parsed_movie_dictionary)
         first_movie = parsed_movie_dictionary[0]
-        
+
         self.response.write(template.render(first_movie))
 
 app = webapp2.WSGIApplication([
