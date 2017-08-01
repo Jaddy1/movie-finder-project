@@ -13,24 +13,33 @@
     <a href="/"><img src="https://cdn3.iconfinder.com/data/icons/multimedia/100/play_movie_3-512.png"></a>
     <div id='movie1'>
     {% for movie in movies %}
+    <section>
       <ul>
         <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{ movie.rootId }}"> {{ movie.title }} </button>
         <div id="{{ movie.rootId }}" class="collapse">
+          <h2>Decription</h2>
           <li> {{ movie.shortDescription }} </li>
 
+          <h2>Actors</h2>
           {% for people in movie.topCast %}
             <li>
               {% print people %}
             </li>
           {% endfor %}
 
+          <h2>Theatre</h2>
           {% for theatre in movie.showtimes %}
             <li>
               {{ theatre.theatre.name }} Date/Time: {{ theatre.dateTime }}
             </li>
           {% endfor %}
+          <form action="{{ movie.officialUrl }}">
+            <button type="submit">Buy Ticket</button>
+          </form>
         </div>
       </ul>
+    </section>
+    </br>
     {% endfor %}
   </body>
 </html>
