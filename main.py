@@ -21,6 +21,7 @@ import json
 import urllib2
 import urllib
 import logging
+from collections import defaultdict
 
 jinja_environment = jinja2.Environment(loader=
     jinja2.FileSystemLoader(os.path.dirname(__file__)))
@@ -36,10 +37,18 @@ class MainHandler(webapp2.RequestHandler):
         date_search = self.request.get('date_input')
 
         base_url = "http://data.tmsapi.com/v1.1/movies/showings?"
-        url_params = {'zip': zip_search, 'api_key': '36k9bq59cgdtxm2xaxx8r6gr', 'startDate': date_search}
+        url_params = {'zip': zip_search, 'api_key': 'dev9tj3wfhmyq736p82tnffn', 'startDate': date_search}
         movie_response = urllib2.urlopen(base_url + urllib.urlencode(url_params)).read()
         parsed_movie_dictionary = json.loads(movie_response)
         movies = {'movies' : parsed_movie_dictionary[:5]}
+
+        for movie in parsed_movie_dictionary[:5]:
+            theatre_dict = defaultdict(list)
+            for theatre in movie['showtimes']:
+                theatre_name = theatre['theatre']['name']
+                theatre_dict[theatre_name].append(theatre['dateTime'])
+            movie['special_showtimes'] = theatre_dict
+            logging.info(theatre_dict)
 
         self.response.write(template.render(movies))
 

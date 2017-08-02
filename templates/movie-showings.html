@@ -11,33 +11,53 @@
   </head>
   <body>
     <a href="/"><img src="https://cdn3.iconfinder.com/data/icons/multimedia/100/play_movie_3-512.png"></a>
-    <div id='movie1'>
     {% for movie in movies %}
-    <section>
-      <ul>
-        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{ movie.rootId }}"> {{ movie.title }} </button>
-        <div id="{{ movie.rootId }}" class="collapse">
-          <h2>Description</h2>
-          <li> {{ movie.shortDescription }} </li>
+    <section id="section">
+      <div class = "box">
+        <div class= "box-style"></div>
+        <div class="text-opacity">
+        <br>
+        <ul>
+          <center><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{ movie.rootId }}"> {{ movie.title }} </button></center>
+          <div id="{{ movie.rootId }}" class="collapse">
+            <div class="collapsable-info">
+            <h2>Decription</h2>
+            <li> {{ movie.shortDescription }} </li>
 
-          <h2>Actors</h2>
-          {% for people in movie.topCast %}
-            <li>
-              {% print people %}
-            </li>
-          {% endfor %}
+            <h2>Actors</h2>
+            {% for people in movie.topCast %}
+              <li>
+                {% print people %}
+              </li>
+            {% endfor %}
 
-          <h2>Theater</h2>
-          {% for theatre in movie.showtimes %}
-            <li>
-              {{ theatre.theatre.name }} Date/Time: {{ theatre.dateTime }}
-            </li>
-          {% endfor %}
-          <form action="{{ movie.officialUrl }}">
-            <button type="submit">Buy Ticket</button>
-          </form>
-        </div>
-      </ul>
+            <h2>Theatre</h2>
+            <!-- {% for theatre in movie.showtimes %}
+              <li>
+                {{ theatre.theatre.name }} Date/Time: {{ theatre.dateTime }}
+              </li>
+            {% endfor %} -->
+
+            {% for theatre in movie['special_showtimes'] %}
+              <li id = "theater-name">
+                {% print theatre %}
+              </li>
+                {% for time in movie['special_showtimes'][theatre] %}
+                  <li>
+                    {% print time %}
+                  </li>
+                {% endfor %}
+            {% endfor %}
+
+            <form action="{{ movie.officialUrl }}">
+              <button type="submit" class="btn btn-warning">Buy Ticket(s)</button>
+            </form>
+
+            </div>
+          </div>
+        </ul>
+      </div>
+      </div>
     </section>
     </br>
     {% endfor %}

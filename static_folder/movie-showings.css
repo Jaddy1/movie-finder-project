@@ -1,5 +1,5 @@
 body{
-  background-image: url("http://www.guoguiyan.com/data/out/71/69032835-film-wallpapers.jpg");
+  background-image: url("https://theonlytvboxyouneed.com/wp-content/uploads/2017/04/2014-Movie-Poster-Collage.jpg");
 }
 img{
   display: block;
@@ -7,6 +7,42 @@ img{
   height: 100px;
   width: 100px;
 }
-section{
-  border: 1px black solid;
+.box{
+  border: 2px black solid;
+  width: 50%;
+  margin: 30px;
+  background-color: rgba(255, 255, 255, 0.6);
+  /*background-color: #ffffff;*/
+  /*opacity: 0.6;*/
+  /*filter: alpha(opacity=60);
+  z-index: 0;*/
 }
+
+.box-style{
+  background-color: rgba(255, 255, 255, 0.6);
+  /*height: 100%;
+  width: 100%;*/
+}
+
+.text-opacity{
+  color: rgba(0, 0, 0, 1);
+}
+
+/*.collapsable-info {
+  margin-top: -100%;
+}*/
+
+#section{
+  display: flex; /*Always needed for flex positioning*/
+  justify-content: center;
+}
+li{
+  list-style-type: none
+}
+#theater-name{
+  font-weight: bold;
+}
+/*
+Movie Collage Backgrounds
+https://theonlytvboxyouneed.com/wp-content/uploads/2017/04/2014-Movie-Poster-Collage.jpg
+http://pre01.deviantart.net/f737/th/pre/f/2017/015/7/1/2017_movie_posters_by_the_dark_mamba_995-datz3gl.jpg*/
