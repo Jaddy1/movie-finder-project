@@ -21,6 +21,7 @@ import json
 import urllib2
 import urllib
 import logging
+from collections import defaultdict
 
 jinja_environment = jinja2.Environment(loader=
     jinja2.FileSystemLoader(os.path.dirname(__file__)))
@@ -36,12 +37,34 @@ class MainHandler(webapp2.RequestHandler):
         date_search = self.request.get('date_input')
 
         base_url = "http://data.tmsapi.com/v1.1/movies/showings?"
-        url_params = {'zip': zip_search, 'api_key': 'dev9tj3wfhmyq736p82tnffn', 'startDate': date_search}
+        url_params = {'zip': zip_search, 'api_key': '36k9bq59cgdtxm2xaxx8r6gr', 'startDate': date_search}
         movie_response = urllib2.urlopen(base_url + urllib.urlencode(url_params)).read()
         parsed_movie_dictionary = json.loads(movie_response)
-        movies = {"movies" : parsed_movie_dictionary[:5]}
+        # movies = {'movies' : parsed_movie_dictionary[:10]}
 
-        self.response.write(template.render(movies))
+        for movie in parsed_movie_dictionary[:15]:
+            theatre_dict = defaultdict(list)
+            for theatre in movie['showtimes']:
+                theatre_name = theatre['theatre']['name']
+                theatre_dict[theatre_name].append(theatre['dateTime'])
+            movie['special_showtimes'] = theatre_dict
+
+            # time to get the poster image for this movie
+            img_base_url = "https://api.themoviedb.org/3/search/movie?"
+            img_url_params = {'query': movie['title'], 'api_key': '15d2ea6d0dc1d476efbca3eba2b9bbfb'}
+            img_response = urllib2.urlopen(img_base_url + urllib.urlencode(img_url_params)).read()
+            parsed_img_dictionary = json.loads(img_response)
+            image_url = "http://image.tmdb.org/t/p/w500//qquEFkFbQX1i8Bal260EgGCnZ0f.jpg"
+            if len(parsed_img_dictionary['results']) > 0:
+                image_url = "http://image.tmdb.org/t/p/w500/" + parsed_img_dictionary['results'][0]['poster_path']
+            movie['special_poster'] = image_url
+
+        movies_we_disp = []
+        for movie in parsed_movie_dictionary[:15]:
+            if "3D" not in movie["title"] and "3d" not in movie["title"]:
+                movies_we_disp.append(movie)
+
+        self.response.write(template.render({'movies' : movies_we_disp}))
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
