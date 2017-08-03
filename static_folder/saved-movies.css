@@ -1,11 +1,14 @@
 body{
-  background-image: url("https://theonlytvboxyouneed.com/wp-content/uploads/2017/04/2014-Movie-Poster-Collage.jpg");
+  background-image: url("http://pre01.deviantart.net/f737/th/pre/f/2017/015/7/1/2017_movie_posters_by_the_dark_mamba_995-datz3gl.jpg");
 }
-#icon{
+#logo{
   display: block;
   margin: auto;
   height: 100px;
   width: 100px;
+}
+#title{
+  margin: auto;
 }
 .box{
   border: 2px black solid;
@@ -37,14 +40,4 @@ body{
 #section{
   display: flex; /*Always needed for flex positioning*/
   justify-content: center;
-}
-li{
-  list-style-type: none
-}
-#theater-name{
-  font-weight: bold;
-}
-#poster{
-  width: 150px;
-
 }

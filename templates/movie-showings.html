@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <a href="/"><img src="https://cdn3.iconfinder.com/data/icons/multimedia/100/play_movie_3-512.png"></a>
+    <a href="/"><img id="icon" src="https://cdn3.iconfinder.com/data/icons/multimedia/100/play_movie_3-512.png"></a>
     {% for movie in movies %}
     <section id="section">
       <div class = "box">
@@ -21,6 +21,9 @@
           <center><button type="button" class="btn btn-info" data-toggle="collapse" data-target="#{{ movie.rootId }}"> {{ movie.title }} </button></center>
           <div id="{{ movie.rootId }}" class="collapse">
             <div class="collapsable-info">
+
+            <center><br><img id = "poster" src="{{ movie.special_poster }}"></center>
+
             <h2>Decription</h2>
             <li> {{ movie.shortDescription }} </li>
 
@@ -32,12 +35,6 @@
             {% endfor %}
 
             <h2>Theatre</h2>
-            <!-- {% for theatre in movie.showtimes %}
-              <li>
-                {{ theatre.theatre.name }} Date/Time: {{ theatre.dateTime }}
-              </li>
-            {% endfor %} -->
-
             {% for theatre in movie['special_showtimes'] %}
               <li id = "theater-name">
                 {% print theatre %}
@@ -47,6 +44,7 @@
                     {% print time %}
                   </li>
                 {% endfor %}
+                <br>
             {% endfor %}
 
             <form action="{{ movie.officialUrl }}">

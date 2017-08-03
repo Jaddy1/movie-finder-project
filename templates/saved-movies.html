@@ -1,33 +1,35 @@
 <!Doctype html>
 <html>
   <head>
-    <title>Movie Search Site</title>
-    <link rel="stylesheet" href="/resources/index.css">
+    <title>Saved Movies</title>
+    <link rel="stylesheet" href="saved-movies.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </head>
   <body>
     <section id="top">
-      <a href="/"><img src="https://cdn3.iconfinder.com/data/icons/multimedia/100/play_movie_3-512.png"></a>
+      <a href="/"><img id="logo" src="https://cdn3.iconfinder.com/data/icons/multimedia/100/play_movie_3-512.png"></a>
     </section>
-    <h1 id="MovieFinder">The Movie Finder</h1>
     <br>
     <br>
-    <p>Welcome to the Movie finder where you can find any recent movie and its showtime at a location near you!</p>
-    <form id="button" method="post">
-      <br>
-      <br>
-      <input id="textbox" type = "text" name = "zip_code_input" placeholder="Enter Zip Code">
-      <input id="textbox" type = "text" name = "date_input" placeholder="Enter Prefered Date (yyyy-mm-dd)">
-      <br>
-      <br>
-      <button type="submit" class="btn btn-primary btn-lg">Search -></button>
+    <section id="section">
+      <div class = "box">
+        <div class= "box-style"></div>
+        <div class="text-opacity">
+          <center><h1 id="title">Your Saved Movies</h1></center>
+          <br>
+          <p>Here are movies that you saved and would like to see later!</p>
+    <!-- <form id="button" method="post">
+      <button type="submit" class="btn btn-primary btn-lg">Search -></button> -->
 
       <!-- <div class="alert alert-danger" role="alert"> Alert Message
         <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
       </div> -->
-
-    </form>
+        </div>
+        </div>
+      </div>
+    </section>
+    <!-- </form> -->
   </body>
 </html>
