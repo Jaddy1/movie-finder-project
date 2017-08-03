@@ -23,25 +23,6 @@ import urllib
 import logging
 from collections import defaultdict
 from google.appengine.ext import ndb
-from google.appengine.api import users
-
-
-def Login():
-    user = users.get_current_user()
-    if user:
-        greeting = ('Welcome, %s! (<a href="%s">sign out</a>)' %
-            (user.nickname(), users.create_logout_url('/')))
-        return greeting
-    else:
-        greeting = ('<a href="%s">Sign in</a>' %
-            users.create_login_url('/'))
-        return greeting
-
-login = {'login':Login()}
-
-class Person(ndb.Model):
-    name = ndb.StringProperty()
-    email = ndb.StringProperty()
 
 jinja_environment = jinja2.Environment(loader=
     jinja2.FileSystemLoader(os.path.dirname(__file__)))
@@ -49,7 +30,7 @@ jinja_environment = jinja2.Environment(loader=
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template('templates/search_zip.html')
-        self.response.write(template.render(login))
+        self.response.write(template.render())
     def post(self):
         template = jinja_environment.get_template('templates/movie-showings.html')
         zip_search = self.request.get('zip_code_input')
