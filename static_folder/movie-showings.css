@@ -1,7 +1,7 @@
 body{
   background-image: url("https://theonlytvboxyouneed.com/wp-content/uploads/2017/04/2014-Movie-Poster-Collage.jpg");
 }
-img{
+#icon{
   display: block;
   margin: auto;
   height: 100px;
@@ -41,4 +41,7 @@ li{
 }
 #theater-name{
   font-weight: bold;
+}
+#poster{
+  width: 150px;
 }

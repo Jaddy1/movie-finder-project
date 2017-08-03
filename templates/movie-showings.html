@@ -10,7 +10,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <a href="/"><img src="https://cdn3.iconfinder.com/data/icons/multimedia/100/play_movie_3-512.png"></a>
+    <a href="/"><img id="icon" src="https://cdn3.iconfinder.com/data/icons/multimedia/100/play_movie_3-512.png"></a>
     {% for movie in movies %}
     <section id="section">
       <div class = "box">
@@ -22,7 +22,7 @@
           <div id="{{ movie.rootId }}" class="collapse">
             <div class="collapsable-info">
 
-            </br><img src="{{ movie.special_poster }}">
+            <center><br><img id="poster" src="{{ movie.special_poster }}"></center>
 
             <h2>Decription</h2>
             <li> {{ movie.shortDescription }} </li>
@@ -45,6 +45,10 @@
                   </li>
                 {% endfor %}
             {% endfor %}
+            
+            <iframe class="youtube-player" type="text/html" width="640" height="385"
+            src="{{ movie.youtube_url }}" frameborder="0">
+            </iframe>
 
             <form action="{{ movie.officialUrl }}">
               <button type="submit" class="btn btn-warning">Buy Ticket(s)</button>

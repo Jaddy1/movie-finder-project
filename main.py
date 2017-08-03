@@ -22,15 +22,34 @@ import urllib2
 import urllib
 import logging
 from collections import defaultdict
+from google.appengine.ext import ndb
+from google.appengine.api import users
+
+
+def Login():
+    user = users.get_current_user()
+    if user:
+        greeting = ('Welcome, %s! (<a href="%s">sign out</a>)' %
+            (user.nickname(), users.create_logout_url('/')))
+        return greeting
+    else:
+        greeting = ('<a href="%s">Sign in</a>' %
+            users.create_login_url('/'))
+        return greeting
+
+login = {'login':Login()}
+
+class Person(ndb.Model):
+    name = ndb.StringProperty()
+    email = ndb.StringProperty()
 
 jinja_environment = jinja2.Environment(loader=
     jinja2.FileSystemLoader(os.path.dirname(__file__)))
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        logging.info("hello from the get")
         template = jinja_environment.get_template('templates/search_zip.html')
-        self.response.write(template.render())
+        self.response.write(template.render(login))
     def post(self):
         template = jinja_environment.get_template('templates/movie-showings.html')
         zip_search = self.request.get('zip_code_input')
@@ -40,7 +59,6 @@ class MainHandler(webapp2.RequestHandler):
         url_params = {'zip': zip_search, 'api_key': '36k9bq59cgdtxm2xaxx8r6gr', 'startDate': date_search}
         movie_response = urllib2.urlopen(base_url + urllib.urlencode(url_params)).read()
         parsed_movie_dictionary = json.loads(movie_response)
-        # movies = {'movies' : parsed_movie_dictionary[:10]}
 
         for movie in parsed_movie_dictionary[:15]:
             theatre_dict = defaultdict(list)
@@ -59,12 +77,22 @@ class MainHandler(webapp2.RequestHandler):
                 image_url = "http://image.tmdb.org/t/p/w500/" + parsed_img_dictionary['results'][0]['poster_path']
             movie['special_poster'] = image_url
 
+            #get the trailer for each movie
+            youtube_base_url = "https://www.googleapis.com/youtube/v3/search?"
+            youtube_url_params = {"part":'snippet', "maxResults": '1', "key": 'AIzaSyBseWPl3V9IQ87oDyh6KwOByXTWh50sRxw', "q" : movie['title'] + "+trailer"}
+            logging.info(youtube_base_url + urllib.urlencode(youtube_url_params))
+            youtube_response = urllib2.urlopen(youtube_base_url + urllib.urlencode(youtube_url_params)).read()
+            parsed_youtube_dictionary = json.loads(youtube_response)
+            youtube_url = "https://www.youtube.com/embed/" + parsed_youtube_dictionary['items'][0]['id']['videoId']
+            movie['youtube_url'] = youtube_url
+
+
         movies_we_disp = []
         for movie in parsed_movie_dictionary[:15]:
             if "3D" not in movie["title"] and "3d" not in movie["title"]:
                 movies_we_disp.append(movie)
 
-        self.response.write(template.render({'movies' : movies_we_disp}))
+        self.response.write(template.render({'movies' :movies_we_disp}))
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
